@@ -5,45 +5,57 @@
         <h3>Bienvenue sur le site de MediaTek86 consacré aux formations en ligne</h3>
     </p>
     <p class="mt-3">
-        Vous allez pouvoir vous former à différents outils numériques gratuitement et directement en ligne.<br />
+        Vous allez pouvoir vous former à différents outils numériques gratuitement et directement en ligne.<br /><br />
         Dans la partie <strong><a href="{{ path('formations') }}" class="link-info">Formations</a></strong>, vous trouverez la liste des formations proposées.
         Vous pourrez faire des recherches et des tris. 
         En cliquant sur la capture, vous accèderez à la présentation plus détaillée de la formation ainsi que la vidéo correspondante.<BR />
         Vous pouvez aussi retrouver les vidéos regroupées dans des playlists, dans la partie <strong><a href="{{ path('playlists') }}" class="link-info">Playlists</a></strong>.
     </p>
-    <p>
-        Voici les <strong>deux dernières formations</strong> ajoutées au catalogue :
-        <table class="table">
-            <tr>
-                {% for formation in formations %}
-                    <td>
-                        <div class="row">
-                            <div class="col">
-                                <!-- emplacement photo -->
+    <div class="container text-center mt-4">
+        <h6 class="text-secondary">Voici les <strong>deux dernières formations</strong> ajoutées au catalogue :</h6>
+    </div>
+
+{# Le code suivant est une adaptation de celui de l'accueil du projet Mesvoyages : si ça bug, c'est là qu'il faut aller voir #}
+    <div class="container">
+        <div class="row mt-3">
+            {% for formation in formations %}
+                <div class="col-md-6 mt-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="row g-0">
+                            <!-- emplacement photo -->
+                            <div class="col-6">
                                 {% if formation.picture %}
-                                    <a href="{{ path('formations.showone', {id:formation.id}) }}">
-                                    <img src="{{ formation.picture }}" 
-                                         class="card-img-top" style="width:100%;height:auto;">
-                                    </a>    
+                                    <a href="{{ path('formations.showone', {id: formation.id}) }}">
+                                        <img src="{{ formation.picture }}"
+                                             class="w-100 h-100 rounded-start"
+                                             style="object-fit: cover;"
+                                             alt="Illustration de la formation {{ formation.title }}">
+                                    </a>
+                                {% else %}
+                                    <p><em>Aucune image disponible</em></p>
                                 {% endif %}
                             </div>
-                            <div class="col">
-                                <p>{{ formation.publishedatstring }}</p>
-                                <h5 class="text-info mt-1">
-                                    {{ formation.title }}
-                                </h5>
-                                <strong>playlist : </strong>{{ formation.playlist.name }}<br />
-                                <strong>catégories : </strong> 
-                                {% for categorie in formation.categories %}
-                                    {{ categorie.name }}&nbsp;
-                                {% endfor %}
-                            </div>    
-                        </div>                    
-                {% endfor %}    
-            </tr>
-
-        </table>        
-    </p>
+                            
+                            <!-- Infos -->
+                            <div class="col-6 p-2 d-flex flex-column justify-content-between">
+                                <div>
+                                    <p><em>{{ formation.publishedatstring }}</em></p>
+                                    
+                                    <h5 class="text-info mt-1">
+                                        {{ formation.title }}
+                                    </h5>
+                                    
+                                    <strong>Playlist :</strong> {{ formation.playlist.name }}<br />
+                                    <strong>Catégories : </strong>
+                                    {% for categorie in formation.categories %}
+                                        {{ categorie.name }}&nbsp;
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
-
-
