@@ -23,6 +23,10 @@ class Formation
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\LessThanOrEqual(
+            "today",
+            message: "La date de création doit être antérieure ou égale à aujourd'hui."
+        )]
     private ?\DateTimeInterface $publishedAt = null;
 
     #[ORM\Column(length: 100, nullable: true)]

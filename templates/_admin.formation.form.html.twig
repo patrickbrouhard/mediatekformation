@@ -1,0 +1,35 @@
+{{ form_start(formFormation) }}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            {{ form_row(formFormation.title) }}
+            {{ form_row(formFormation.videoId) }}
+            {{ form_row(formFormation.description) }}
+            {{ form_row(formFormation.publishedAt) }}
+            {{ form_row(formFormation.playlist) }}
+            <div class="mb-3">
+                {{ form_label(formFormation.categories) }}
+
+                <div class="d-flex flex-wrap gap-3">
+                    {% for categorie in formFormation.categories %}
+                        <div class="form-check">
+                            {{ form_widget(categorie, {'attr': {'class': 'form-check-input'}}) }}
+                            {{ form_label(categorie, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {{ form_errors(formFormation.categories) }}
+            </div>
+
+            <div class="text-end">
+                {{ form_row(formFormation.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{{ form_end(formFormation) }}
