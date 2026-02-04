@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/mediatekformation/src/Controller/PlaylistsController.php</file>
+            <file>file:/C:/wamp64/www/mediatekformation/templates/_admin.formation.form.html.twig</file>
+            <file>file:/C:/wamp64/www/mediatekformation/src/Controller/admin/AdminFormationsController.php</file>
+            <file>file:/C:/wamp64/www/mediatekformation/src/Repository/FormationRepository.php</file>
+            <file>file:/C:/wamp64/www/mediatekformation/templates/admin/admin.formations.html.twig</file>
+            <file>file:/C:/wamp64/www/mediatekformation/src/Entity/Formation.php</file>
+            <file>file:/C:/wamp64/www/mediatekformation/src/Form/FormationType.php</file>
+            <file>file:/C:/wamp64/www/mediatekformation/config/routes.yaml</file>
         </group>
     </open-files>
 </project-private>

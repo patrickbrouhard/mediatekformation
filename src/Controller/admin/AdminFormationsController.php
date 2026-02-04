@@ -29,11 +29,12 @@ class AdminFormationsController extends AbstractController
      * @var CategorieRepository
      */
     private CategorieRepository $categorieRepository;
-    
-    public function __construct(FormationRepository $formationRepository, CategorieRepository $categorieRepository)
-    {
+    public function __construct(
+        FormationRepository $formationRepository,
+        CategorieRepository $categorieRepository
+    ) {
         $this->formationRepository = $formationRepository;
-        $this->categorieRepository= $categorieRepository;
+        $this->categorieRepository = $categorieRepository;
     }
     
     #[Route('/admin/formations', name: 'admin.formations')]

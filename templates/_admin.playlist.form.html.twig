@@ -1,0 +1,18 @@
+{{ form_start(formPlaylist) }}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            {{ form_row(formPlaylist.name) }}
+            {{ form_row(formPlaylist.description) }}
+            
+            <div class="text-end">
+                {{ form_row(formPlaylist.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{{ form_end(formPlaylist) }}
