@@ -17,13 +17,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin.formations') }}">Accueil</a>
+                        <a class="nav-link" href="{{ path('accueil') }}">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('playlists') }}">Formations</a>
+                        <a class="nav-link" href="{{ path('admin.formations') }}">Formations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Catégories</a>
+                        <a class="nav-link" href="{{ path('admin.playlists') }}">Playlists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin.categories') }}">Catégories</a>
                     </li>                    
                 </ul>
             </div>

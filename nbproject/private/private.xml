@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/wamp64/www/mediatekformation/templates/_admin.formation.form.html.twig</file>
-            <file>file:/C:/wamp64/www/mediatekformation/src/Controller/admin/AdminFormationsController.php</file>
             <file>file:/C:/wamp64/www/mediatekformation/src/Repository/FormationRepository.php</file>
+            <file>file:/C:/wamp64/www/mediatekformation/src/Controller/admin/AdminPlaylistsController.php</file>
+            <file>file:/C:/wamp64/www/mediatekformation/src/Form/PlaylistType.php</file>
             <file>file:/C:/wamp64/www/mediatekformation/templates/admin/admin.formations.html.twig</file>
-            <file>file:/C:/wamp64/www/mediatekformation/src/Entity/Formation.php</file>
+            <file>file:/C:/wamp64/www/mediatekformation/templates/admin/admin.playlists.html.twig</file>
             <file>file:/C:/wamp64/www/mediatekformation/src/Form/FormationType.php</file>
-            <file>file:/C:/wamp64/www/mediatekformation/config/routes.yaml</file>
+            <file>file:/C:/wamp64/www/mediatekformation/src/Entity/Playlist.php</file>
         </group>
     </open-files>
 </project-private>
