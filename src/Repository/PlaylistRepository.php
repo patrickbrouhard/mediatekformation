@@ -63,6 +63,7 @@ class PlaylistRepository extends ServiceEntityRepository
         ->addSelect('COUNT(f.id) AS HIDDEN nbFormations')
         ->groupBy('p.id')
         ->orderBy('nbFormations', $ordre)
+        ->addOrderBy('p.name', 'ASC')
         ->getQuery()
         ->getResult();
     }
