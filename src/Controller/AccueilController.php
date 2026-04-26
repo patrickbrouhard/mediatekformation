@@ -7,27 +7,33 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Description of AccueilController
- *
- * @author emds
+ * Contrôleur de gestion de la page d'accueil
  */
 class AccueilController extends AbstractController
 {
     
     /**
+     * Repository des formations.
+     *
      * @var FormationRepository
      */
     private $repository;
     
     /**
+     * Constructeur du contrôleur.
      *
-     * @param FormationRepository $repository
+     * @param FormationRepository $repository Repository des formations
      */
     public function __construct(FormationRepository $repository)
     {
         $this->repository = $repository;
     }
     
+    /**
+     * Affiche la page d'accueil avec les dernières formations.
+     *
+     * @return Response Réponse HTTP
+     */
     #[Route('/', name: 'accueil')]
     public function index(): Response
     {
@@ -37,6 +43,11 @@ class AccueilController extends AbstractController
         ]);
     }
     
+    /**
+     * Affiche la page des conditions générales d'utilisation.
+     *
+     * @return Response Réponse HTTP
+     */
     #[Route('/cgu', name: 'cgu')]
     public function cgu(): Response
     {

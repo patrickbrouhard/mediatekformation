@@ -7,11 +7,39 @@ use App\Entity\Formation;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Tests unitaires du repository Playlist.
+ *
+ * Vérifie les opérations principales :
+ * - ajout d'une playlist
+ * - suppression d'une playlist
+ * - tri par nom
+ * - tri par nombre de formations
+ * - recherche par valeur contenue
+ */
 class PlaylistRepositoryTest extends KernelTestCase
 {
+    /**
+     * Gestionnaire d'entités Doctrine utilisé pour les tests.
+     *
+     * @var EntityManagerInterface|null
+     */
     private ?EntityManagerInterface $entityManager = null;
+
+    /**
+     * Repository de l'entité Playlist.
+     *
+     * @var mixed
+     */
     private $repository;
 
+    /**
+     * Initialise le kernel Symfony et prépare le repository pour les tests.
+     *
+     * Symfony exécute automatiquement cette méthode avant chaque test.
+     *
+     * @return void
+     */
     protected function setUp(): void
     {
         self::bootKernel();
@@ -27,11 +55,24 @@ class PlaylistRepositoryTest extends KernelTestCase
         $this->entityManager->beginTransaction();
     }
 
+    /**
+     * Crée une nouvelle instance de playlist pour les tests.
+     *
+     * @param string $name Nom de la playlist
+     * @return Playlist
+     */
     private function newPlaylist(string $name): Playlist
     {
         return (new Playlist())->setName($name);
     }
 
+    /**
+     * Crée une nouvelle instance de formation associée à une playlist.
+     *
+     * @param Playlist $playlist Playlist associée
+     * @param string $title Titre de la formation
+     * @return Formation
+     */
     private function newFormation(Playlist $playlist, string $title): Formation
     {
         return (new Formation())
@@ -41,6 +82,11 @@ class PlaylistRepositoryTest extends KernelTestCase
             ->setPublishedAt(new \DateTime());
     }
 
+    /**
+     * Teste l'ajout d'une playlist dans le repository.
+     *
+     * @return void
+     */
     public function testAddPlaylist(): void
     {
         $playlist = $this->newPlaylist("Playlist test add");
@@ -54,6 +100,11 @@ class PlaylistRepositoryTest extends KernelTestCase
         );
     }
 
+    /**
+     * Teste la suppression d'une playlist dans le repository.
+     *
+     * @return void
+     */
     public function testRemovePlaylist(): void
     {
         $playlist = $this->newPlaylist("Playlist test remove");
@@ -69,6 +120,11 @@ class PlaylistRepositoryTest extends KernelTestCase
         );
     }
 
+    /**
+     * Teste la récupération des playlists triées par nom.
+     *
+     * @return void
+     */
     public function testFindAllOrderByName(): void
     {
         $playlistA = $this->newPlaylist("AAA");
@@ -79,7 +135,7 @@ class PlaylistRepositoryTest extends KernelTestCase
 
         $playlists = $this->repository->findAllOrderByName("ASC");
         
-        // on transforme la liste de formations en liste des titres des formations
+        // on transforme la liste de playlists en liste des noms des playlists
         $titres = [];
         foreach ($playlists as $playlist) {
             $titres[] = $playlist->getName();
@@ -97,6 +153,11 @@ class PlaylistRepositoryTest extends KernelTestCase
         );
     }
 
+    /**
+     * Teste la récupération des playlists triées par nombre de formations associées.
+     *
+     * @return void
+     */
     public function testFindAllOrderByNbFormations(): void
     {
         $playlist1 = $this->newPlaylist("Playlist 1");
@@ -128,6 +189,11 @@ class PlaylistRepositoryTest extends KernelTestCase
         );
     }
 
+    /**
+     * Teste la recherche d'une playlist par valeur contenue dans un champ donné.
+     *
+     * @return void
+     */
     public function testFindByContainValue(): void
     {
         // Génère une chaine aléatoire en hexadécimal pur
@@ -144,6 +210,11 @@ class PlaylistRepositoryTest extends KernelTestCase
         );
     }
     
+    /**
+     * Nettoie l'environnement après chaque test en annulant la transaction Doctrine.
+     *
+     * @return void
+     */
     protected function tearDown(): void
     {
         parent::tearDown();

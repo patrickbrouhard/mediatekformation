@@ -6,17 +6,57 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Tests fonctionnels du contrôleur d'administration des playlists.
+ *
+ * Vérifie :
+ * - l'accès à la page d'administration
+ * - l'accès à l'édition d'une playlist
+ * - l'état du bouton de suppression
+ * - le tri des playlists
+ * - le filtrage texte
+ * - le filtrage par catégorie
+ * - l'accès à la page d'ajout d'une playlist
+ */
 class AdminPlaylistsControllerTest extends WebTestCase
 {
+    /**
+     * Route racine de la gestion des playlists en administration.
+     *
+     * @var string
+     */
     private const RACINE = '/admin/playlists';
+
+    /**
+     * Sélecteur CSS du titre de la première ligne du tableau.
+     *
+     * @var string
+     */
     private const SELECTEUR_TITRE_PREMIERE_LIGNE =
         'tbody tr:first-child td:first-child';
+
+    /**
+     * Sélecteur CSS des titres présents dans le tableau.
+     *
+     * @var string
+     */
     private const SELECTEUR_TITRES_TABLEAU =
         'tbody tr td:first-child';
+
+    /**
+     * Titre attendu pour certaines vérifications de tri.
+     *
+     * @var string
+     */
     private const TITRE_ATTENDU_CSHARP =
         'Bases de la programmation (C#)';
 
 
+    /**
+     * Crée un client HTTP authentifié avec un utilisateur administrateur.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\KernelBrowser
+     */
     private function createClientLoggedIn()
     {
         $client = static::createClient();
@@ -36,7 +76,9 @@ class AdminPlaylistsControllerTest extends WebTestCase
     }
 
     /**
-     * Vérifie que la page admin playlists est accessible
+     * Vérifie que la page d'administration des playlists est accessible.
+     *
+     * @return void
      */
     public function testAccesPageAdminPlaylists(): void
     {
@@ -49,7 +91,9 @@ class AdminPlaylistsControllerTest extends WebTestCase
 
     /**
      * Vérifie que le clic sur le bouton éditer
-     * permet d'accéder à la page d'édition
+     * permet d'accéder à la page d'édition.
+     *
+     * @return void
      */
     public function testClicEditPlaylist(): void
     {
@@ -71,6 +115,11 @@ class AdminPlaylistsControllerTest extends WebTestCase
         );
     }
 
+    /**
+     * Vérifie que le bouton de suppression est désactivé lorsque nécessaire.
+     *
+     * @return void
+     */
     public function testBoutonSuppressionDisabled(): void
     {
         $client = $this->createClientLoggedIn();
@@ -85,7 +134,13 @@ class AdminPlaylistsControllerTest extends WebTestCase
 
 
     /**
+     * Vérifie le tri des playlists selon différents critères.
+     *
      * @dataProvider providerTriPlaylists
+     *
+     * @param string $url URL de tri appelée
+     * @param string $titreAttendu Titre attendu en première position
+     * @return void
      */
     public function testTriPlaylists(
         string $url,
@@ -105,6 +160,11 @@ class AdminPlaylistsControllerTest extends WebTestCase
     }
 
 
+    /**
+     * Fournit les cas de test pour le tri des playlists.
+     *
+     * @return array<string, array{string,string}>
+     */
     public function providerTriPlaylists(): array
     {
         return [
@@ -134,7 +194,14 @@ class AdminPlaylistsControllerTest extends WebTestCase
 
 
     /**
+     * Vérifie le filtrage texte des playlists.
+     *
      * @dataProvider providerFiltresTexte
+     *
+     * @param string $valeurRecherche Valeur recherchée
+     * @param int $nbResultatsAttendus Nombre de résultats attendus
+     * @param string $titreAttendu Premier titre attendu
+     * @return void
      */
     public function testFiltresTexte(
         string $valeurRecherche,
@@ -165,6 +232,11 @@ class AdminPlaylistsControllerTest extends WebTestCase
     }
 
 
+    /**
+     * Fournit les cas de test pour le filtrage texte des playlists.
+     *
+     * @return array<string, array{string,int,string}>
+     */
     public function providerFiltresTexte(): array
     {
         return [
@@ -179,6 +251,11 @@ class AdminPlaylistsControllerTest extends WebTestCase
     }
 
 
+    /**
+     * Vérifie le filtrage des playlists par catégorie.
+     *
+     * @return void
+     */
     public function testFiltreParCategorie(): void
     {
         $client = $this->createClientLoggedIn();
@@ -207,6 +284,11 @@ class AdminPlaylistsControllerTest extends WebTestCase
     }
 
 
+    /**
+     * Vérifie l'accès à la page d'ajout d'une playlist.
+     *
+     * @return void
+     */
     public function testAccesPageAjoutPlaylist(): void
     {
         $client = $this->createClientLoggedIn();

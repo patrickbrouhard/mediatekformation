@@ -12,11 +12,18 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class FormationValidationTest extends KernelTestCase
 {
+    /**
+     * Validateur Symfony utilisé pour tester les contraintes.
+     *
+     * @var ValidatorInterface
+     */
     private ValidatorInterface $validator;
 
     /**
      * Initialise le kernel et récupère le validator avant chaque test.
-     * Symfony utilise setUp automatiquement (si présent) avant chaque test
+     * Symfony utilise setUp automatiquement (si présent) avant chaque test.
+     *
+     * @return void
      */
     protected function setUp(): void
     {
@@ -28,7 +35,7 @@ class FormationValidationTest extends KernelTestCase
      * Crée une entité Formation valide par défaut.
      * Il n'est pas nécessaire de créer une "vraie" playlist.
      *
-     * @return Formation
+     * @return Formation Instance de Formation valide
      */
     private function getFormation(): Formation
     {
@@ -38,6 +45,11 @@ class FormationValidationTest extends KernelTestCase
             ->setPlaylist(new Playlist());
     }
 
+    /**
+     * Vérifie qu'une date de publication future est invalide.
+     *
+     * @return void
+     */
     public function testPublishedAtCannotBeFuture(): void
     {
         $dateFuture = new \DateTime('+1 day');
@@ -51,6 +63,11 @@ class FormationValidationTest extends KernelTestCase
         );
     }
 
+    /**
+     * Vérifie qu'une date de publication passée est valide.
+     *
+     * @return void
+     */
     public function testPublishedAtCanBePast(): void
     {
         $datePast = new \DateTime('-1 day');

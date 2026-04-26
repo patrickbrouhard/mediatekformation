@@ -6,10 +6,30 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Tests fonctionnels du contrôleur d'administration des catégories.
+ *
+ * Vérifie :
+ * - l'accès à la page d'administration des catégories
+ * - l'affichage du formulaire d'ajout
+ * - la présence du bouton de suppression
+ * - la gestion des suppressions impossibles
+ * - la gestion des catégories inexistantes
+ */
 class AdminCategoriesControllerTest extends WebTestCase
 {
+    /**
+     * Route racine de la gestion des catégories en administration.
+     *
+     * @var string
+     */
     private const RACINE = '/admin/categories';
 
+    /**
+     * Crée un client HTTP authentifié avec un utilisateur administrateur.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\KernelBrowser
+     */
     private function createClientLoggedIn()
     {
         $client = static::createClient();
@@ -29,7 +49,9 @@ class AdminCategoriesControllerTest extends WebTestCase
     }
 
     /**
-     * Vérifie accès page catégories admin
+     * Vérifie l'accès à la page d'administration des catégories.
+     *
+     * @return void
      */
     public function testAccesPageAdminCategories(): void
     {
@@ -41,7 +63,9 @@ class AdminCategoriesControllerTest extends WebTestCase
     }
 
     /**
-     * Vérifie la présence du mini-formulaire d'ajout
+     * Vérifie la présence du mini-formulaire d'ajout de catégorie.
+     *
+     * @return void
      */
     public function testAffichageFormAjoutCategorie(): void
     {
@@ -50,6 +74,11 @@ class AdminCategoriesControllerTest extends WebTestCase
         $this->assertSelectorExists('form');
     }
 
+    /**
+     * Vérifie la présence du bouton de suppression d'une catégorie.
+     *
+     * @return void
+     */
     public function testBoutonSuppressionCategorieExiste(): void
     {
         $client = $this->createClientLoggedIn();
@@ -63,7 +92,9 @@ class AdminCategoriesControllerTest extends WebTestCase
     }
 
     /**
-     * Vérifie suppression catégorie liée à formations
+     * Vérifie la tentative de suppression d'une catégorie liée à des formations.
+     *
+     * @return void
      */
     public function testSuppressionCategorieAvecFormations(): void
     {
@@ -95,7 +126,9 @@ class AdminCategoriesControllerTest extends WebTestCase
     }
 
     /**
-     * Vérifie suppression catégorie inexistante
+     * Vérifie la tentative de suppression d'une catégorie inexistante.
+     *
+     * @return void
      */
     public function testSuppressionCategorieInexistante(): void
     {
@@ -110,5 +143,4 @@ class AdminCategoriesControllerTest extends WebTestCase
             Response::HTTP_NOT_FOUND
         );
     }
-
 }

@@ -7,14 +7,39 @@ use App\Entity\Playlist;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Tests unitaires du repository Formation.
+ *
+ * Vérifie les opérations principales :
+ * - ajout d'une formation
+ * - suppression d'une formation
+ * - tri personnalisé
+ * - recherche par valeur contenue
+ * - récupération des dernières formations
+ * - récupération des formations par playlist
+ */
 class FormationRepositoryTest extends KernelTestCase
 {
+    /**
+     * Gestionnaire d'entités Doctrine utilisé pour les tests.
+     *
+     * @var EntityManagerInterface|null
+     */
     private ?EntityManagerInterface $entityManager;
+
+    /**
+     * Repository de l'entité Formation.
+     *
+     * @var mixed
+     */
     private $repository;
 
     /**
-     * Initialise le kernel et récupère le validator avant chaque test.
-     * Symfony utilise setUp automatiquement (si présent) avant chaque test
+     * Initialise le kernel Symfony et prépare le repository pour les tests.
+     *
+     * Symfony exécute automatiquement cette méthode avant chaque test.
+     *
+     * @return void
      */
     protected function setUp(): void
     {
@@ -31,6 +56,12 @@ class FormationRepositoryTest extends KernelTestCase
         $this->entityManager->beginTransaction();
     }
 
+    /**
+     * Crée une nouvelle instance de formation pour les tests.
+     *
+     * @param string $title Titre de la formation
+     * @return Formation
+     */
     private function newFormation(string $title): Formation
     {
         $playlist = new Playlist();
@@ -43,6 +74,11 @@ class FormationRepositoryTest extends KernelTestCase
             ->setPublishedAt(new \DateTime());
     }
 
+    /**
+     * Teste l'ajout d'une formation dans le repository.
+     *
+     * @return void
+     */
     public function testAddFormation(): void
     {
         $formation = $this->newFormation("Formation test add");
@@ -56,6 +92,11 @@ class FormationRepositoryTest extends KernelTestCase
         );
     }
 
+    /**
+     * Teste la suppression d'une formation dans le repository.
+     *
+     * @return void
+     */
     public function testRemoveFormation(): void
     {
         $formation = $this->newFormation("Formation test remove");
@@ -70,6 +111,11 @@ class FormationRepositoryTest extends KernelTestCase
         );
     }
 
+    /**
+     * Teste la récupération de toutes les formations triées selon un champ donné.
+     *
+     * @return void
+     */
     public function testFindAllOrderBy(): void
     {
         $formationA = $this->newFormation("AAA");
@@ -98,6 +144,11 @@ class FormationRepositoryTest extends KernelTestCase
         );
     }
 
+    /**
+     * Teste la recherche d'une formation par valeur contenue dans un champ donné.
+     *
+     * @return void
+     */
     public function testFindByContainValue(): void
     {
         // Génère une chaine aléatoire en hexadécimal pur
@@ -111,6 +162,11 @@ class FormationRepositoryTest extends KernelTestCase
         $this->assertSame($formation->getId(), $results[0]->getId());
     }
 
+    /**
+     * Teste la récupération des dernières formations publiées.
+     *
+     * @return void
+     */
     public function testFindAllLasted(): void
     {
         // On crée une formation avec une date légèrement plus récente que "now"
@@ -138,6 +194,11 @@ class FormationRepositoryTest extends KernelTestCase
         );
     }
 
+    /**
+     * Teste la récupération des formations associées à une playlist donnée.
+     *
+     * @return void
+     */
     public function testFindAllForOnePlaylist(): void
     {
         $playlist = new Playlist();
@@ -177,6 +238,11 @@ class FormationRepositoryTest extends KernelTestCase
         $this->assertSame("BBB", $results[1]->getTitle());
     }
     
+    /**
+     * Nettoie l'environnement après chaque test en annulant la transaction Doctrine.
+     *
+     * @return void
+     */
     protected function tearDown(): void
     {
         parent::tearDown();
