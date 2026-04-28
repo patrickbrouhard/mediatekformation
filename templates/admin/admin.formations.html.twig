@@ -14,8 +14,16 @@
             <tr>
                 <th scope="col">
                     Formation
-                    <a href="{{ path('admin.formations.sort', {champ:'title', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
-                    <a href="{{ path('admin.formations.sort', {champ:'title', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                    <form action="{{ path('admin.formations.sort', {champ:'title', ordre:'ASC'}) }}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info btn-sm active" aria-pressed="true">
+                            <
+                        </button>
+                    </form>
+                    <form action="{{ path('admin.formations.sort', {champ:'title', ordre:'DESC'}) }}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info btn-sm active" aria-pressed="true" title="Trier par titre descendant">
+                            >
+                        </button>
+                    </form>
                     <form class="form-inline mt-1" method="POST" action="{{ path('admin.formations.findallcontain', {champ:'title'}) }}">
                         <div class="form-group mr-1 mb-2">
                             <input type="text" class="sm" name="recherche"
@@ -27,8 +35,16 @@
                 </th>
                 <th scope="col">
                     Playlist
-                    <a href="{{ path('admin.formations.sort', {table:'playlist', champ:'name', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
-                    <a href="{{ path('admin.formations.sort', {table:'playlist', champ:'name', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                    <form action="{{ path('admin.formations.sort', {table:'playlist', champ:'name', ordre:'ASC'}) }}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info btn-sm active" aria-pressed="true" title="Trier les playlists par nom ascendant">
+                            <
+                        </button>
+                    </form>
+                    <form action="{{ path('admin.formations.sort', {table:'playlist', champ:'name', ordre:'DESC'}) }}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info btn-sm active" aria-pressed="true" title="Trier les playlists par nom descendant">
+                            >
+                        </button>
+                    </form>
                     <form class="form-inline mt-1" method="POST" action="{{ path('admin.formations.findallcontain', {champ:'name', table:'playlist'}) }}">
                         <div class="form-group mr-1 mb-2">
                             <input type="text" class="sm" name="recherche"
@@ -56,8 +72,16 @@
                 </th>
                 <th scope="col">
                     Date<br>
-                    <a href="{{ path('admin.formations.sort', {champ:'publishedAt', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
-                    <a href="{{ path('admin.formations.sort', {champ:'publishedAt', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                    <form action="{{ path('admin.formations.sort', {champ:'publishedAt', ordre:'ASC'}) }}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info btn-sm active" aria-pressed="true" title="Trier par date de publication ascendante">
+                            <
+                        </button>
+                    </form>
+                    <form action="{{ path('admin.formations.sort', {champ:'publishedAt', ordre:'DESC'}) }}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info btn-sm active" aria-pressed="true" title="Trier par date de publication descendante">
+                            >
+                        </button>
+                    </form>
                 </th>
                 <th scope="col">Actions</th>
             </tr>
