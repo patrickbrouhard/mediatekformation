@@ -15,17 +15,37 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * Controleur pour la gestion des playlists par l'admin
- *
+ * Contrôleur pour la gestion des playlists par l'administrateur.
  */
 class AdminPlaylistsController extends AbstractController
 {
+    /**
+     * Chemin du template Twig pour la gestion des playlists.
+     */
     private const TWIG_ADMIN_PLAYLISTS = 'admin/admin.playlists.html.twig';
 
+    /**
+     * Repository des playlists.
+     */
     private PlaylistRepository $playlistRepository;
+
+    /**
+     * Repository des formations.
+     */
     private FormationRepository $formationRepository;
+
+    /**
+     * Repository des catégories.
+     */
     private CategorieRepository $categorieRepository;
 
+    /**
+     * Constructeur du contrôleur.
+     *
+     * @param PlaylistRepository $playlistRepository Repository des playlists
+     * @param CategorieRepository $categorieRepository Repository des catégories
+     * @param FormationRepository $formationRepository Repository des formations
+     */
     public function __construct(
         PlaylistRepository $playlistRepository,
         CategorieRepository $categorieRepository,
@@ -36,6 +56,11 @@ class AdminPlaylistsController extends AbstractController
         $this->formationRepository = $formationRepository;
     }
     
+    /**
+     * Affiche la liste des playlists.
+     *
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/playlists', name: 'admin.playlists')]
     public function index(): Response
     {
@@ -47,6 +72,14 @@ class AdminPlaylistsController extends AbstractController
         ]);
     }
     
+    /**
+     * Trie les playlists selon un champ et un ordre donnés.
+     *
+     * @param string $champ Champ de tri
+     * @param string $ordre Ordre de tri (ASC ou DESC)
+     * @param string $table Table associée (optionnel)
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/playlists/tri/{champ}/{ordre}/{table}', name: 'admin.playlists.sort')]
     public function sort(string $champ, string $ordre, string $table = ""): Response
     {
@@ -78,6 +111,14 @@ class AdminPlaylistsController extends AbstractController
         ]);
     }
     
+    /**
+     * Recherche des playlists contenant une valeur dans un champ donné.
+     *
+     * @param string $champ Champ de recherche
+     * @param Request $request Requête HTTP
+     * @param string $table Table associée (optionnel)
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/playlists/recherche/{champ}/{table}', name: 'admin.playlists.findallcontain')]
     public function findAllContain($champ, Request $request, $table=""): Response
     {
@@ -92,6 +133,12 @@ class AdminPlaylistsController extends AbstractController
         ]);
     }
     
+    /**
+     * Ajoute une nouvelle playlist.
+     *
+     * @param Request $request Requête HTTP
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/playlist/ajout', name: 'admin.playlist.ajout')]
     public function ajout(Request $request): Response
     {
@@ -109,6 +156,13 @@ class AdminPlaylistsController extends AbstractController
         ]);
     }
     
+    /**
+     * Modifie une playlist existante.
+     *
+     * @param int $id Identifiant de la playlist
+     * @param Request $request Requête HTTP
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/playlist/edit/{id}', name: 'admin.playlist.edit')]
     public function edit(int $id, Request $request): Response
     {
@@ -132,6 +186,12 @@ class AdminPlaylistsController extends AbstractController
         ]);
     }
     
+    /**
+     * Supprime une playlist si elle ne contient aucune formation.
+     *
+     * @param int $id Identifiant de la playlist
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/playlist/suppr/{id}', name: 'admin.playlist.suppr')]
     public function suppr(int $id) : Response
     {

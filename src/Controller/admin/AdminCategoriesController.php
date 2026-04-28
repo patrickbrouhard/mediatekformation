@@ -14,16 +14,31 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * Controleur pour la gestion des categories par l'admin
- *
+ * Contrôleur pour la gestion des catégories par l'administrateur.
  */
 class AdminCategoriesController extends AbstractController
 {
+    /**
+     * Chemin du template Twig pour la gestion des catégories.
+     */
     private const TWIG_ADMIN_CATEGORIES = 'admin/admin.categories.html.twig';
 
+    /**
+     * Repository des catégories.
+     */
     private CategorieRepository $categorieRepository;
+
+    /**
+     * Repository des formations.
+     */
     private FormationRepository $formationRepository;
 
+    /**
+     * Constructeur du contrôleur.
+     *
+     * @param CategorieRepository $categorieRepository Repository des catégories
+     * @param FormationRepository $formationRepository Repository des formations
+     */
     public function __construct(
         CategorieRepository $categorieRepository,
         FormationRepository $formationRepository
@@ -32,6 +47,12 @@ class AdminCategoriesController extends AbstractController
         $this->categorieRepository = $categorieRepository;
     }
     
+    /**
+     * Affiche la liste des catégories et gère l'ajout d'une nouvelle catégorie.
+     *
+     * @param Request $request Requête HTTP
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/categories', name: 'admin.categories')]
     public function index(Request $request): Response
     {
@@ -54,6 +75,12 @@ class AdminCategoriesController extends AbstractController
         ]);
     }
         
+    /**
+     * Supprime une catégorie si elle n'est rattachée à aucune formation.
+     *
+     * @param int $id Identifiant de la catégorie
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/categorie/suppr/{id}', name: 'admin.categorie.suppr')]
     public function suppr(int $id) : Response
     {

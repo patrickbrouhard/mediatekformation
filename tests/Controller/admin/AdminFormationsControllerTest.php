@@ -7,18 +7,55 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Tests fonctionnels du contrôleur AdminFormationsController
+ * Tests fonctionnels du contrôleur AdminFormationsController.
+ *
+ * Vérifie :
+ * - l'accès à la page d'administration des formations
+ * - l'accès à la page d'édition
+ * - la présence du bouton de suppression
+ * - le tri des formations
+ * - les filtres texte
+ * - le filtre par catégorie
+ * - l'accès à la page d'ajout d'une formation
  */
 class AdminFormationsControllerTest extends WebTestCase
 {
+    /**
+     * Route racine de la gestion des formations en administration.
+     *
+     * @var string
+     */
     private const RACINE = '/admin/formations';
+
+    /**
+     * Sélecteur CSS du titre de la première ligne du tableau.
+     *
+     * @var string
+     */
     private const SELECTEUR_TITRE_PREMIERE_LIGNE =
         'tbody tr:first-child td:first-child';
+
+    /**
+     * Sélecteur CSS des titres présents dans le tableau.
+     *
+     * @var string
+     */
     private const SELECTEUR_TITRES_TABLEAU =
         'tbody tr td:first-child';
+
+    /**
+     * Titre attendu pour certaines vérifications de tri.
+     *
+     * @var string
+     */
     private const TITRE_ATTENDU_CSHARP =
         'Bases de la programmation n°74 - POO : collections';
 
+    /**
+     * Crée un client HTTP authentifié avec un utilisateur administrateur.
+     *
+     * @return \Symfony\Bundle\FrameworkBundle\KernelBrowser
+     */
     private function createClientLoggedIn()
     {
         $client = static::createClient();
@@ -38,7 +75,9 @@ class AdminFormationsControllerTest extends WebTestCase
     }
 
     /**
-     * Vérifie que la page admin formations est accessible
+     * Vérifie que la page admin formations est accessible.
+     *
+     * @return void
      */
     public function testAccesPageAdminFormations(): void
     {
@@ -52,7 +91,9 @@ class AdminFormationsControllerTest extends WebTestCase
 
     /**
      * Vérifie que le clic sur le bouton éditer
-     * permet d'accéder à la page d'édition
+     * permet d'accéder à la page d'édition.
+     *
+     * @return void
      */
     public function testClicEditFormation(): void
     {
@@ -75,7 +116,9 @@ class AdminFormationsControllerTest extends WebTestCase
     }
 
     /**
-     * Vérifie que la suppression redirige correctement
+     * Vérifie que le bouton de suppression d'une formation est présent.
+     *
+     * @return void
      */
     public function testSuppressionFormation(): void
     {
@@ -86,9 +129,6 @@ class AdminFormationsControllerTest extends WebTestCase
         );
 
         $this->assertResponseIsSuccessful();
-        $lien = $crawler
-            ->filter('tbody tr:first-child a.btn-outline-danger')
-            ->link();
 
         $this->assertSelectorExists(
             'a.btn-outline-danger'
@@ -96,9 +136,13 @@ class AdminFormationsControllerTest extends WebTestCase
     }
     
     /**
-     * Test générique des tris admin formations
+     * Test générique des tris admin formations.
      *
      * @dataProvider providerTriFormations
+     *
+     * @param string $url URL de tri appelée
+     * @param string $titreAttendu Titre attendu en première position
+     * @return void
      */
     public function testTriFormations(
         string $url,
@@ -119,7 +163,9 @@ class AdminFormationsControllerTest extends WebTestCase
 
 
     /**
-     * Fournit les cas de test des tris admin formations
+     * Fournit les cas de test des tris admin formations.
+     *
+     * @return array<string, array{string,string}>
      */
     public function providerTriFormations(): array
     {
@@ -159,9 +205,14 @@ class AdminFormationsControllerTest extends WebTestCase
     }
 
     /**
-     * Vérifie que les filtres texte fonctionnent
+     * Vérifie que les filtres texte fonctionnent.
      *
      * @dataProvider providerFiltresTexte
+     *
+     * @param string $valeurRecherche Valeur recherchée
+     * @param int $nbResultatsAttendus Nombre de résultats attendus
+     * @param string $titreAttendu Premier titre attendu
+     * @return void
      */
     public function testFiltresTexte(
         string $valeurRecherche,
@@ -193,7 +244,9 @@ class AdminFormationsControllerTest extends WebTestCase
 
 
     /**
-     * Fournit les cas de test des filtres texte
+     * Fournit les cas de test des filtres texte.
+     *
+     * @return array<string, array{string,int,string}>
      */
     public function providerFiltresTexte(): array
     {
@@ -216,7 +269,9 @@ class AdminFormationsControllerTest extends WebTestCase
 
 
     /**
-     * Vérifie que le filtre par catégorie fonctionne
+     * Vérifie que le filtre par catégorie fonctionne.
+     *
+     * @return void
      */
     public function testFiltreParCategorie(): void
     {
@@ -252,7 +307,9 @@ class AdminFormationsControllerTest extends WebTestCase
 
 
     /**
-     * Vérifie accès page ajout formation
+     * Vérifie accès page ajout formation.
+     *
+     * @return void
      */
     public function testAccesPageAjoutFormation(): void
     {

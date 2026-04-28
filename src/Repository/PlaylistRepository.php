@@ -7,21 +7,40 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * Repository pour l'entité Playlist.
+ *
  * @extends ServiceEntityRepository<Playlist>
  */
 class PlaylistRepository extends ServiceEntityRepository
 {
+    /**
+     * Constructeur.
+     *
+     * @param ManagerRegistry $registry Registre des gestionnaires Doctrine
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Playlist::class);
     }
 
+    /**
+     * Ajoute une playlist en base de données.
+     *
+     * @param Playlist $entity Entité à persister
+     * @return void
+     */
     public function add(Playlist $entity): void
     {
         $this->getEntityManager()->persist($entity);
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * Supprime une playlist de la base de données.
+     *
+     * @param Playlist $entity Entité à supprimer
+     * @return void
+     */
     public function remove(Playlist $entity): void
     {
         $this->getEntityManager()->remove($entity);
@@ -29,10 +48,10 @@ class PlaylistRepository extends ServiceEntityRepository
     }
 
     /**
-     * Retourne toutes les playlists triées sur le nom de la playlist
-     * @param type $champ
-     * @param type $ordre
-     * @return Playlist[]
+     * Retourne toutes les playlists triées par nom.
+     *
+     * @param string $ordre Sens du tri (ASC ou DESC)
+     * @return Playlist[] Liste des playlists
      */
     public function findAllOrderByName($ordre): array
     {
@@ -45,14 +64,14 @@ class PlaylistRepository extends ServiceEntityRepository
     }
 
     /**
-    * Retourne toutes les playlists triées selon le nombre de formations.
-    * Le COUNT(f.id) est utilisé uniquement pour effectuer le tri et
-    * il est HIDDEN pour qu'il ne soit pas présent dans les résultats
-    * On retourne donc uniquement des entités Playlist, sans rien de polluant
-    *
-    * @param string $ordre : sens du tri (ASC ou DESC)
-    * @return array
-    */
+     * Retourne toutes les playlists triées selon le nombre de formations.
+     * Le COUNT(f.id) est utilisé uniquement pour effectuer le tri et
+     * il est HIDDEN pour qu'il ne soit pas présent dans les résultats.
+     * On retourne donc uniquement des entités Playlist.
+     *
+     * @param string $ordre Sens du tri (ASC ou DESC)
+     * @return Playlist[] Liste des playlists
+     */
     public function findAllOrderByNbFormations($ordre): array
     {
         return $this->createQueryBuilder('p')
@@ -69,12 +88,13 @@ class PlaylistRepository extends ServiceEntityRepository
     }
 
     /**
-     * Enregistrements dont un champ contient une valeur
-     * ou tous les enregistrements si la valeur est vide
-     * @param type $champ
-     * @param type $valeur
-     * @param type $table si $champ dans une autre table
-     * @return Playlist[]
+     * Retourne les playlists dont un champ contient une valeur donnée,
+     * ou toutes les playlists si la valeur est vide.
+     *
+     * @param string $champ Nom du champ
+     * @param string $valeur Valeur recherchée
+     * @param string $table Nom de la relation si le champ appartient à une autre table
+     * @return Playlist[] Liste des playlists
      */
     public function findByContainValue($champ, $valeur, $table = ""): array
     {

@@ -8,11 +8,35 @@ use App\Entity\Playlist;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 
+/**
+ * Tests unitaires du repository Categorie.
+ *
+ * Vérifie les opérations principales :
+ * - ajout d'une catégorie
+ * - suppression d'une catégorie
+ * - récupération des catégories associées à une playlist
+ */
 class CategorieRepositoryTest extends KernelTestCase
 {
+    /**
+     * Gestionnaire d'entités Doctrine utilisé pour les tests.
+     *
+     * @var EntityManagerInterface|null
+     */
     private ?EntityManagerInterface $entityManager = null;
+
+    /**
+     * Repository de l'entité Categorie.
+     *
+     * @var mixed
+     */
     private $repository;
 
+    /**
+     * Initialise le kernel Symfony et prépare le repository pour les tests.
+     *
+     * @return void
+     */
     protected function setUp(): void
     {
         self::bootKernel();
@@ -27,11 +51,24 @@ class CategorieRepositoryTest extends KernelTestCase
         $this->entityManager->beginTransaction();
     }
 
+    /**
+     * Crée une nouvelle instance de catégorie pour les tests.
+     *
+     * @param string $name Nom de la catégorie
+     * @return Categorie
+     */
     private function newCategorie(string $name): Categorie
     {
         return (new Categorie())->setName($name);
     }
 
+    /**
+     * Crée une nouvelle instance de formation associée à une playlist et une catégorie.
+     *
+     * @param Playlist $playlist Playlist associée
+     * @param Categorie $categorie Catégorie associée
+     * @return Formation
+     */
     private function newFormation(Playlist $playlist, Categorie $categorie): Formation {
 
         return (new Formation())
@@ -42,6 +79,11 @@ class CategorieRepositoryTest extends KernelTestCase
             ->setPublishedAt(new \DateTime());
     }
 
+    /**
+     * Teste l'ajout d'une catégorie dans le repository.
+     *
+     * @return void
+     */
     public function testAddCategorie(): void
     {
         $categorie = $this->newCategorie("Categorie test");
@@ -55,6 +97,11 @@ class CategorieRepositoryTest extends KernelTestCase
         );
     }
 
+    /**
+     * Teste la suppression d'une catégorie dans le repository.
+     *
+     * @return void
+     */
     public function testRemoveCategorie(): void
     {
         $categorie = $this->newCategorie("Categorie test");
@@ -70,6 +117,11 @@ class CategorieRepositoryTest extends KernelTestCase
         );
     }
 
+    /**
+     * Teste la récupération des catégories associées à une playlist donnée.
+     *
+     * @return void
+     */
     public function testFindAllForOnePlaylist(): void
     {
         $playlist = new Playlist();
@@ -93,6 +145,11 @@ class CategorieRepositoryTest extends KernelTestCase
         );
     }
     
+    /**
+     * Nettoie l'environnement après chaque test en annulant la transaction Doctrine.
+     *
+     * @return void
+     */
     protected function tearDown(): void
     {
         parent::tearDown();

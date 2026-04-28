@@ -13,22 +13,35 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * Controleur pour la gestion des formations par l'admin
- *
+ * Contrôleur pour la gestion des formations par l'administrateur.
  */
 class AdminFormationsController extends AbstractController
 {
-    private const TWIG_ADMIN_FORMATIONS = 'admin/admin.formations.html.twig';
     /**
+     * Chemin du template Twig pour la gestion des formations.
+     */
+    private const TWIG_ADMIN_FORMATIONS = 'admin/admin.formations.html.twig';
+
+    /**
+     * Repository des formations.
      *
      * @var FormationRepository
      */
     private FormationRepository $formationRepository;
+
     /**
+     * Repository des catégories.
      *
      * @var CategorieRepository
      */
     private CategorieRepository $categorieRepository;
+
+    /**
+     * Constructeur du contrôleur.
+     *
+     * @param FormationRepository $formationRepository Repository des formations
+     * @param CategorieRepository $categorieRepository Repository des catégories
+     */
     public function __construct(
         FormationRepository $formationRepository,
         CategorieRepository $categorieRepository
@@ -37,6 +50,11 @@ class AdminFormationsController extends AbstractController
         $this->categorieRepository = $categorieRepository;
     }
     
+    /**
+     * Affiche la liste des formations.
+     *
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/formations', name: 'admin.formations')]
     public function index(): Response
     {
@@ -48,6 +66,14 @@ class AdminFormationsController extends AbstractController
         ]);
     }
     
+    /**
+     * Trie les formations selon un champ et un ordre donnés.
+     *
+     * @param string $champ Champ de tri
+     * @param string $ordre Ordre de tri (ASC ou DESC)
+     * @param string $table Table associée pour le tri (optionnel)
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/formations/tri/{champ}/{ordre}/{table}', name: 'admin.formations.sort')]
     public function sort($champ, $ordre, $table=""): Response
     {
@@ -59,6 +85,14 @@ class AdminFormationsController extends AbstractController
         ]);
     }
     
+    /**
+     * Recherche des formations contenant une valeur dans un champ donné.
+     *
+     * @param string $champ Champ de recherche
+     * @param Request $request Requête HTTP
+     * @param string $table Table associée pour la recherche (optionnel)
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/formations/recherche/{champ}/{table}', name: 'admin.formations.findallcontain')]
     public function findAllContain($champ, Request $request, $table=""): Response
     {
@@ -73,6 +107,12 @@ class AdminFormationsController extends AbstractController
         ]);
     }
     
+    /**
+     * Ajoute une nouvelle formation.
+     *
+     * @param Request $request Requête HTTP
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/formation/ajout', name: 'admin.formation.ajout')]
     public function ajout(Request $request): Response
     {
@@ -90,6 +130,13 @@ class AdminFormationsController extends AbstractController
         ]);
     }
     
+    /**
+     * Modifie une formation existante.
+     *
+     * @param int $id Identifiant de la formation
+     * @param Request $request Requête HTTP
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/formation/edit/{id}', name: 'admin.formation.edit')]
     public function edit(int $id, Request $request): Response
     {
@@ -108,6 +155,12 @@ class AdminFormationsController extends AbstractController
         ]);
     }
     
+    /**
+     * Supprime une formation.
+     *
+     * @param int $id Identifiant de la formation
+     * @return Response Réponse HTTP
+     */
     #[Route('/admin/formation/suppr/{id}', name: 'admin.formation.suppr')]
     public function suppr(int $id) : Response
     {

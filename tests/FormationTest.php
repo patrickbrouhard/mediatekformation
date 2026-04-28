@@ -5,6 +5,11 @@ namespace App\Tests\Entity;
 use App\Entity\Formation;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests unitaires de la classe Formation.
+ *
+ * Vérifie le comportement des méthodes utilitaires liées aux dates de publication.
+ */
 class FormationTest extends TestCase
 {
     /**

@@ -54,10 +54,10 @@ class FormationsControllerTest extends WebTestCase
     }
 
     /**
-     * Test générique des tris sur la liste des formations
-     *
-     * @dataProvider providerTriFormations
-     */
+    * Test générique des tris sur la liste des formations
+    *
+    * @dataProvider providerTriFormations
+    */
     public function testTriFormations(string $url, string $titreAttendu): void
     {
         $client = static::createClient();
@@ -74,11 +74,10 @@ class FormationsControllerTest extends WebTestCase
         );
     }
 
-
     /**
-     * Utilisation d'un data provider pour DRY et lisibilité :
-     * Fournit les cas de tests pour les tris
-     */
+    * Utilisation d'un data provider pour DRY et lisibilité :
+    * Fournit les cas de tests pour les tris
+    */
     public function providerTriFormations(): array
     {
         return [

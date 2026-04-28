@@ -6,8 +6,16 @@
             <tr>
                 <th class="text-left align-top" scope="col">
                     playlist<br />
-                    <a href="{{ path('playlists.sort', {champ:'name', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
-                    <a href="{{ path('playlists.sort', {champ:'name', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                    <form action="{{ path('playlists.sort', {champ:'name', ordre:'ASC'}) }}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info btn-sm active" aria-pressed="true" title="Trier les playlists par nom ascendant">
+                            <
+                        </button>
+                    </form>
+                    <form action="{{ path('playlists.sort', {champ:'name', ordre:'DESC'}) }}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info btn-sm active" aria-pressed="true" title="Trier les playlists par nom descendant">
+                            >
+                        </button>
+                    </form>
                     <form class="form-inline mt-1" method="POST" action="{{ path('playlists.findallcontain', {champ:'name'}) }}">
                         <div class="form-group mr-1 mb-2">
                             <input type="text" class="sm" name="recherche" 
@@ -35,8 +43,16 @@
                 </th>
                 <th>
                     Nb de formations<br />
-                    <a href="{{ path('playlists.sort', {champ:'nbFormations', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
-                    <a href="{{ path('playlists.sort', {champ:'nbFormations', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                    <form action="{{ path('playlists.sort', {champ:'nbFormations', ordre:'ASC'}) }}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info btn-sm active" aria-pressed="true" title="Trier par nombre de formations ascendant">
+                            <
+                        </button>
+                    </form>
+                    <form action="{{ path('playlists.sort', {champ:'nbFormations', ordre:'DESC'}) }}" method="get" style="display:inline;">
+                        <button type="submit" class="btn btn-info btn-sm active" aria-pressed="true" title="Trier par nombre de formations descendant">
+                            >
+                        </button>
+                    </form>
                 </th>
                 <th class="text-center align-top" scope="col">
                     &nbsp;
