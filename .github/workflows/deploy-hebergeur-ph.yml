@@ -23,14 +23,22 @@ jobs:
       - name: Installation des dépendances Composer
         run: composer install --optimize-autoloader --no-interaction --no-progress
 
-      - name: Créer .env.local
+      - name: Créer .htaccess pour mutualisé
         run: |
-          echo "" > .env.local
-          echo "APP_ENV=dev" >> .env.local
-          echo "APP_DEBUG=1" >> .env.local
-          echo "APP_SECRET=${{ secrets.APP_SECRET }}" >> .env.local
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env.local
-          echo "MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0" >> .env.local
+          echo "" >> .htaccess
+          echo "RewriteEngine On" > .htaccess
+          echo "" >> .htaccess
+          echo "RewriteCond %{REQUEST_FILENAME} !-f" >> .htaccess
+          echo "RewriteCond %{REQUEST_FILENAME} !-d" >> .htaccess
+          echo "RewriteRule ^(.*)$ public/\$1 [L]" >> .htaccess
+
+      - name: Créer .env
+        run: |
+          echo "APP_ENV=dev" >> .env
+          echo "APP_DEBUG=1" >> .env
+          echo "APP_SECRET=${{ secrets.APP_SECRET }}" >> .env
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0" >> .env
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -39,6 +47,9 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /public_html/
+
+          dangerous-clean-slate: true # true = Supprime tous les fichiers du serveur avant de déployer les nouveaux fichiers
+
           exclude: |
             **/.git*
             **/.git*/**
