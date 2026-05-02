@@ -32,19 +32,13 @@ jobs:
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env.local
           echo "MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0" >> .env.local
 
-      - name: Clear & warmup cache
-        run: |
-          php bin/console cache:clear
-          php bin/console cache:warmup
-
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /htdocs/
-          dangerous-clean-slate: true
+          server-dir: /public_html/
           exclude: |
             **/.git*
             **/.git*/**
