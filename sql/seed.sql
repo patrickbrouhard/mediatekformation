@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 27 avr. 2026 à 15:17
+-- Généré le : sam. 02 mai 2026 à 11:11
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -18,28 +18,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `mediatekformation`
+-- Base de données : mediatekformation
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categorie`
+-- Structure de la table categorie
 --
 
-DROP TABLE IF EXISTS `categorie`;
-CREATE TABLE IF NOT EXISTS `categorie` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_497DD6345E237E06` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS categorie;
+CREATE TABLE categorie (
+  id int NOT NULL,
+  name varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `categorie`
+-- Déchargement des données de la table categorie
 --
 
-INSERT INTO `categorie` (`id`, `name`) VALUES
+INSERT INTO categorie (id, name) VALUES
 (6, 'Android'),
 (3, 'C#'),
 (9, 'Cours'),
@@ -53,48 +51,45 @@ INSERT INTO `categorie` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `doctrine_migration_versions`
+-- Structure de la table doctrine_migration_versions
 --
 
-DROP TABLE IF EXISTS `doctrine_migration_versions`;
-CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
-  `version` varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `executed_at` datetime DEFAULT NULL,
-  `execution_time` int DEFAULT NULL,
-  PRIMARY KEY (`version`)
+DROP TABLE IF EXISTS doctrine_migration_versions;
+CREATE TABLE doctrine_migration_versions (
+  version varchar(191) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  executed_at datetime DEFAULT NULL,
+  execution_time int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
--- Déchargement des données de la table `doctrine_migration_versions`
+-- Déchargement des données de la table doctrine_migration_versions
 --
 
-INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
+INSERT INTO doctrine_migration_versions (version, executed_at, execution_time) VALUES
 ('DoctrineMigrations\\Version20240513134621', '2024-05-13 13:47:49', 1145),
 ('DoctrineMigrations\\Version20260323201732', '2026-03-23 20:19:52', 129);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `formation`
+-- Structure de la table formation
 --
 
-DROP TABLE IF EXISTS `formation`;
-CREATE TABLE IF NOT EXISTS `formation` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `playlist_id` int DEFAULT NULL,
-  `published_at` datetime DEFAULT NULL,
-  `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `video_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_404021BF6BBD148` (`playlist_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=243 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS formation;
+CREATE TABLE formation (
+  id int NOT NULL,
+  playlist_id int DEFAULT NULL,
+  published_at datetime DEFAULT NULL,
+  title varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  description longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  video_id varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `formation`
+-- Déchargement des données de la table formation
 --
 
-INSERT INTO `formation` (`id`, `playlist_id`, `published_at`, `title`, `description`, `video_id`) VALUES
+INSERT INTO formation (id, playlist_id, published_at, title, description, video_id) VALUES
 (1, 1, '2021-01-04 00:00:00', 'Eclipse n°8 : Déploiement', 'Exécution de l\'application en dehors de l\'IDE, en invite de commande.\r\nCréation d\'un ficher jar pour le déploiement de l\'application.\r\n00:20 : exécuter l\'application à partir d\'un invite de commandes\r\n04:41 : créer un fichier jar auto exécutable\r\n06:42 : exécuter un fichier jar directement\r\n07:09 : exécuter un fichier jar dans l\'invite de commande pour avoir les retours console', 'Z4yTTXka958'),
 (2, 1, '2021-01-02 17:00:01', 'Eclipse n°7 : Tests unitaires', 'Intégration de JUnit dans l\'application et création de tests unitaires.\n00:07 : rappel sur le principe du test unitaire\n01:01 : intégrer JUnit au projet (une seule fois)\n01:52 : créer une classe de test\n03:49 : créer une méthode de test\n08:35 : lancer le test\n09:11 : créer une autre méthode de test pour tester la même méthode\n11:02 : relancer le test', '-nw42Xq6cYE'),
 (3, 1, '2020-12-30 17:00:07', 'Eclipse n°6 : Documentation technique', 'Intégration des commentaires normalisés et génération automatique de la documentation technique\n00:08 : insérer des commentaires normalisés\n02:14 : générer documentation technique\n04:35 : repérer et corriger les erreurs et warnings\n06:58 : afficher la documentation technique', 'PrK_P3TKc00'),
@@ -198,7 +193,7 @@ INSERT INTO `formation` (`id`, `playlist_id`, `published_at`, `title`, `descript
 (103, 11, '2018-02-06 10:30:31', 'TP Android n°13 : formatage de la date', 'Prérequis : avoir des connaissance en programmation objet (et avoir vu les vidéos précédentes de la construction de l\'application Android)\r\nBut : montrer comment transformer une chaîne en date et vice versa.', 'NwvHF4BcMck'),
 (104, 11, '2018-02-04 18:03:43', 'TP Android n°12 : base de données distante MySQL (4)', 'Prérequis : avoir des connaissance en programmation objet (et avoir vu les vidéos précédentes de la construction de l\'application Android)\r\nBut : sous Android Studio, récupération du dernier profil distant dans le thread et affichage des informations dans l\'interface.', 'uNP706aKIRs'),
 (105, 11, '2018-02-02 13:30:29', 'TP Android n°11 : base de données distante MySQL (3)', 'Prérequis : avoir des connaissance en programmation objet, en PHP et MySQL (et avoir vu les vidéos précédentes de la construction de l\'application Android)\r\nBut : sous Android Studio, création la classe AccesDistant qui est en lien avec AccesHTTP pour communiquer avec le serveur distant. Contrôle, dans la console, que la communication marche. Contrôle, dans MySQL, que le profil s\'enregistre.\r\n\r\nERRATUM : 30:10 je dis qu\'il envoie vers le serveur la requête. Ce n\'est pas la requête qui est envoyée mais juste les valeurs du profil. La requête est construite dans la page PHP.', '8Kyq69u9iqU');
-INSERT INTO `formation` (`id`, `playlist_id`, `published_at`, `title`, `description`, `video_id`) VALUES
+INSERT INTO formation (id, playlist_id, published_at, title, description, video_id) VALUES
 (106, 11, '2018-02-01 12:18:38', 'TP Android n°10 : base de données distante MySQL (2)', 'IMPORTANT n°1 : nouvelle classe AccesHTTP à télécharger (voir plus bas) \r\n\r\nIMPORTANT n°2 : si vous n\'arrivez pas à accéder à la base de données :\r\nIl existe maintenant 2 formats de BDD : MySQL et MariaDB, tous les 2 accessibles au même endroit et fonctionnant de façon similaire, mais sur des ports différents.\r\nDans le fichier fonctions.php que vous avez créé, je vous conseille de modifier la variable de connexion par :\r\n$conn = new PDO(\"mysql:host=$serveur;dbname=$bd;port=3308\", $login, $mdp);\r\nEn fait, si vous avez créer la base sous MariaDB (actuellement par défaut) le port est celui par défaut : 3306. Si vous avez sélectionné MySQL, normalement le nouveau port est 3308. Ca vaut d\'ailleurs le coup aussi de tester les 2...\r\n\r\n\r\n\r\n Prérequis : avoir des connaissance en programation objet (et avoir vu les vidéos précédentes de la construction de l\'application Android)\r\nBut : sous Android Studio, faire les bons paramétrages et créer les classes outils nécessaires pour l\'accès au serveur distant via Internet et le protocole HTTP.*\r\nERRATUM : à 22:09 je dis par erreur que onPostExecute est appelé par le execute de la classe mère. C\'est doInBackground qui est appelé par execute de la classe mère. onPostExecute est une méthode événementielle appelée lorsque le serveur renvoie une réponse.\r\n\r\nIMPORTANT :\r\nDans la classe AccesHTTP, j\'utilise des classes qui sont obsolètes et qui peuvent maintenant poser problème. Je ferai une vidéo pour montrer le principe d\'une nouvelle classe AccesHTTP, mais en attendant, je vous donne son code que vous pouvez récupérer ici : \r\nhttp://bit.ly/EmdsNewAccesHTTP\r\nPensez à changer le nom du package (1e ligne).\r\nLa logique est proche de la classe montrée dans la vidéo et normalement vous n\'avez rien à changer dans le reste du programme excepté que vous n\'avez plus besoin de mettre la ligne \'useLibrary \"org.apache.http.legacy\" \' dans build.gradle, comme montré en tout début de vidéo.', 'n5AeP-fqT30'),
 (107, 11, '2018-01-31 14:20:06', 'TP Android n°9 : base de données distante MySQL (1)', 'Prérequis : de préférence des connaissances de base en PHP et MySQL\r\n\r\nBut : installer WAMP (ou LAMP ou MAMP suivant votre système) pour tester en local, créer une base de données MySQL (en utilisant phpMyAdmin), créer 2 pages php (une pour se connecter à la base de données, une autre pour gérer les demandes de l\'application Android qui voudra enregistrer un profil et récupérer le dernier profil enregistré).\r\nERRATUM : tout à la fin, je parle de \"vidéo précédente\", il est bien sûr question de \"vidéo suivante\".', 'PKd8CEXXyLk'),
 (108, 11, '2018-01-28 14:39:00', 'TP Android n°8 : base de  données locale SQLite', 'Prérequis : connaissances en Java, en programmation objet, en SQL et avoir vu les vidéos précédentes de cette série\r\nBut : Découvrir le fonctionnement d\'une base de données au format SQLite. Créer les classes d\'accès. Manipuler un curseur. Enregistrer les profils et les récupérer. Utiiser un browser externe pour consulter la base de données.', 'vRaR3yLnHig'),
@@ -318,7 +313,7 @@ INSERT INTO `formation` (`id`, `playlist_id`, `published_at`, `title`, `descript
 (223, 20, '2016-11-02 15:46:24', 'Cours Transactions et verrous (14 à 17 / 17) : risques sur les verrous et cas d\'utilisation', 'Prérequis : connaissances basiques en SQL\r\nBut : présentation des transactions sql et de leur niveau d\'isolement, ainsi que des verrous explicites (programmation dans un SGBDR)\r\nLe cours est constitué de 17 diapos, découpées en 3 vidéos (durée totale 32mn) :\r\n1-6 : transactions\r\n7-13 : verrous et problèmes d\'accès\r\n14-17 : risques sur les verrous et cas d\'utilisation\r\n\r\nlien vers le pdf du cours :\r\nhttp://bit.ly/EmdsTransactions_verrous', '4yW0fTIQW6k'),
 (224, 20, '2016-11-02 15:42:03', 'Cours Transactions et verrous (7 à 13 / 17) : verrous et problèmes d\'accès', 'Prérequis : connaissances basiques en SQL\r\nBut : présentation des transactions sql et de leur niveau d\'isolement, ainsi que des verrous explicites (programmation dans un SGBDR)\r\nLe cours est constitué de 17 diapos, découpées en 3 vidéos (durée totale 32mn) :\r\n1-6 : transactions\r\n7-13 : verrous et problèmes d\'accès\r\n14-17 : risques sur les verrous et cas d\'utilisation\r\n\r\nlien vers le pdf du cours :\r\nhttp://bit.ly/EmdsTransactions_verrous', 'o7Yjg8Ct4Bs'),
 (225, 20, '2016-11-02 15:34:02', 'Cours Transactions et verrous (1 à 6 / 17) : transactions', 'Prérequis : connaissances basiques en SQL\r\nBut : présentation des transactions sql et de leur niveau d\'isolement, ainsi que des verrous explicites (programmation dans un SGBDR)\r\nLe cours est constitué de 17 diapos, découpées en 3 vidéos (durée totale 32mn) :\r\n1-6 : transactions\r\n7-13 : verrous et problèmes d\'accès\r\n14-17 : risques sur les verrous et cas d\'utilisation\r\n\r\nlien vers le pdf du cours :\r\nhttp://bit.ly/EmdsTransactions_verrous', 'A6tY7ZqiyVw');
-INSERT INTO `formation` (`id`, `playlist_id`, `published_at`, `title`, `description`, `video_id`) VALUES
+INSERT INTO formation (id, playlist_id, published_at, title, description, video_id) VALUES
 (226, 21, '2016-10-31 14:26:37', 'Cours Curseurs(5 à 8 / 8) : curseur historique et curseur dans le SGBDR', 'Prérequis : connaissances en programmation et en SQL\r\nBut : présentation des 3 catégories de curseurs (programmation dans un SGBDR)\r\nLe cours est constitué de 8 diapos, découpées en 2 vidéos (durée totale 25mn) :\r\n1-4 : introduction et curseur objet\r\n5-8 : curseur historique et curseur dans le SGBDR\r\n\r\nlien vers le pdf du cours :\r\nhttp://bit.ly/EmdsCurseurs', '4H2GMEwqCjA'),
 (227, 21, '2016-10-31 14:11:01', 'Cours Curseurs(1 à 4 / 8) : introduction et curseur objet', 'Prérequis : connaissances en programmation et en SQL\r\nBut : présentation des 3 catégories de curseurs (programmation dans un SGBDR)\r\nLe cours est constitué de 8 diapos, découpées en 2 vidéos (durée totale 25mn) :\r\n1-4 : introduction et curseur objet\r\n5-8 : curseur historique et curseur dans le SGBDR\r\n\r\nlien vers le pdf du cours :\r\nhttp://bit.ly/EmdsCurseurs', 'Y09HkNAQTKw'),
 (228, 23, '2016-10-29 13:23:14', 'Cours Triggers (26 à 32 / 32) : procédures et fonctions stockées', 'Prérequis : connaissances en Merise2 (playlists MCD et Merise2) et SQL\r\nBut : introduction aux triggers et procédures stockées (programmation dans un SGBDR)\r\nLe cours est constitué de 32 diapos, découpées en 6 vidéos (durée totale 57mn) :\r\n1-4 : introduction\r\n5-9 : exemple trigger sur exclusion\r\n10-14 : exemple trigger sur inclusion\r\n15-20 : syntaxe du langage\r\n21-25 : inclusion multiple et autres exemples de triggers\r\n26-32 : procédures et fonctions stockées\r\n\r\nlien vers le pdf du cours :\r\nhttp://bit.ly/EmdsTriggers', '9WgLpEa8U-0'),
@@ -338,23 +333,20 @@ INSERT INTO `formation` (`id`, `playlist_id`, `published_at`, `title`, `descript
 -- --------------------------------------------------------
 
 --
--- Structure de la table `formation_categorie`
+-- Structure de la table formation_categorie
 --
 
-DROP TABLE IF EXISTS `formation_categorie`;
-CREATE TABLE IF NOT EXISTS `formation_categorie` (
-  `formation_id` int NOT NULL,
-  `categorie_id` int NOT NULL,
-  PRIMARY KEY (`formation_id`,`categorie_id`),
-  KEY `IDX_830086E95200282E` (`formation_id`),
-  KEY `IDX_830086E9BCF5E72D` (`categorie_id`)
+DROP TABLE IF EXISTS formation_categorie;
+CREATE TABLE formation_categorie (
+  formation_id int NOT NULL,
+  categorie_id int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `formation_categorie`
+-- Déchargement des données de la table formation_categorie
 --
 
-INSERT INTO `formation_categorie` (`formation_id`, `categorie_id`) VALUES
+INSERT INTO formation_categorie (formation_id, categorie_id) VALUES
 (1, 1),
 (2, 1),
 (3, 1),
@@ -636,43 +628,38 @@ INSERT INTO `formation_categorie` (`formation_id`, `categorie_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `messenger_messages`
+-- Structure de la table messenger_messages
 --
 
-DROP TABLE IF EXISTS `messenger_messages`;
-CREATE TABLE IF NOT EXISTS `messenger_messages` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `body` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `headers` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue_name` varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
-  `available_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
-  `delivered_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
-  PRIMARY KEY (`id`),
-  KEY `IDX_75EA56E0FB7336F0` (`queue_name`),
-  KEY `IDX_75EA56E0E3BD61CE` (`available_at`),
-  KEY `IDX_75EA56E016BA31DB` (`delivered_at`)
+DROP TABLE IF EXISTS messenger_messages;
+CREATE TABLE messenger_messages (
+  id bigint NOT NULL,
+  body longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  headers longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  queue_name varchar(190) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  created_at datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  available_at datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  delivered_at datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `playlist`
+-- Structure de la table playlist
 --
 
-DROP TABLE IF EXISTS `playlist`;
-CREATE TABLE IF NOT EXISTS `playlist` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS playlist;
+CREATE TABLE playlist (
+  id int NOT NULL,
+  name varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  description longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `playlist`
+-- Déchargement des données de la table playlist
 --
 
-INSERT INTO `playlist` (`id`, `name`, `description`) VALUES
+INSERT INTO playlist (id, name, description) VALUES
 (1, 'Eclipse et Java', 'Utilisation de l\'IDE Eclipse et développement en Java.'),
 (2, 'Visual Studio 2019 et C#', 'Plusieurs vidéos portant sur différents aspects de Visual Studio :\r\nProgrammation en C# (événementiel, objet, diverses astuces) et configuration (lien avec Github...).'),
 (3, 'Programmation sous Python', 'Exercices progressifs pour apprendre à programmer sous Python.'),
@@ -704,42 +691,128 @@ INSERT INTO `playlist` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
+-- Structure de la table user
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `roles` json NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_IDENTIFIER_USERNAME` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS user;
+CREATE TABLE `user` (
+  id int NOT NULL,
+  username varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  roles json NOT NULL,
+  password varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Déchargement des données de la table `user`
+-- Déchargement des données de la table user
 --
 
-INSERT INTO `user` (`id`, `username`, `roles`, `password`) VALUES
+INSERT INTO user (id, username, roles, password) VALUES
 (1, 'admin', '[\"ROLE_ADMIN\"]', '$2y$13$xV66hNmyKKqHn6cKR.xsfuPK/.iS2tuSdB9Qyq4q08MFKHZNt9ykS');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table categorie
+--
+ALTER TABLE categorie
+  ADD PRIMARY KEY (id),
+  ADD UNIQUE KEY UNIQ_497DD6345E237E06 (name);
+
+--
+-- Index pour la table doctrine_migration_versions
+--
+ALTER TABLE doctrine_migration_versions
+  ADD PRIMARY KEY (version);
+
+--
+-- Index pour la table formation
+--
+ALTER TABLE formation
+  ADD PRIMARY KEY (id),
+  ADD KEY IDX_404021BF6BBD148 (playlist_id);
+
+--
+-- Index pour la table formation_categorie
+--
+ALTER TABLE formation_categorie
+  ADD PRIMARY KEY (formation_id,categorie_id),
+  ADD KEY IDX_830086E95200282E (formation_id),
+  ADD KEY IDX_830086E9BCF5E72D (categorie_id);
+
+--
+-- Index pour la table messenger_messages
+--
+ALTER TABLE messenger_messages
+  ADD PRIMARY KEY (id),
+  ADD KEY IDX_75EA56E0FB7336F0 (queue_name),
+  ADD KEY IDX_75EA56E0E3BD61CE (available_at),
+  ADD KEY IDX_75EA56E016BA31DB (delivered_at);
+
+--
+-- Index pour la table playlist
+--
+ALTER TABLE playlist
+  ADD PRIMARY KEY (id);
+
+--
+-- Index pour la table user
+--
+ALTER TABLE user
+  ADD PRIMARY KEY (id),
+  ADD UNIQUE KEY UNIQ_IDENTIFIER_USERNAME (username);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table categorie
+--
+ALTER TABLE categorie
+  MODIFY id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT pour la table formation
+--
+ALTER TABLE formation
+  MODIFY id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=243;
+
+--
+-- AUTO_INCREMENT pour la table messenger_messages
+--
+ALTER TABLE messenger_messages
+  MODIFY id bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table playlist
+--
+ALTER TABLE playlist
+  MODIFY id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT pour la table user
+--
+ALTER TABLE user
+  MODIFY id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `formation`
+-- Contraintes pour la table formation
 --
-ALTER TABLE `formation`
-  ADD CONSTRAINT `FK_404021BF6BBD148` FOREIGN KEY (`playlist_id`) REFERENCES `playlist` (`id`);
+ALTER TABLE formation
+  ADD CONSTRAINT FK_404021BF6BBD148 FOREIGN KEY (playlist_id) REFERENCES playlist (id);
 
 --
--- Contraintes pour la table `formation_categorie`
+-- Contraintes pour la table formation_categorie
 --
-ALTER TABLE `formation_categorie`
-  ADD CONSTRAINT `FK_830086E95200282E` FOREIGN KEY (`formation_id`) REFERENCES `formation` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_830086E9BCF5E72D` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`id`) ON DELETE CASCADE;
+ALTER TABLE formation_categorie
+  ADD CONSTRAINT FK_830086E95200282E FOREIGN KEY (formation_id) REFERENCES formation (id) ON DELETE CASCADE,
+  ADD CONSTRAINT FK_830086E9BCF5E72D FOREIGN KEY (categorie_id) REFERENCES categorie (id) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
