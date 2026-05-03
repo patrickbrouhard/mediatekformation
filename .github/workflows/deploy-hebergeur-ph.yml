@@ -28,9 +28,19 @@ jobs:
         run: |
           cat > .htaccess <<'EOF'
           RewriteEngine On
-          
+          Options -Indexes
+
+          # Cas racine "/"
+          RewriteRule ^$ public/index.php [L]
+
+          # Évite les boucles
+          RewriteCond %{REQUEST_URI} !^/public/
+
+          # Si ce n'est ni un fichier ni un dossier
           RewriteCond %{REQUEST_FILENAME} !-f
           RewriteCond %{REQUEST_FILENAME} !-d
+
+          # Redirige vers /public
           RewriteRule ^(.*)$ public/$1 [L]
           EOF
 
