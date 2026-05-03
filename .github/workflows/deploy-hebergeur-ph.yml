@@ -24,21 +24,25 @@ jobs:
         run: composer install --optimize-autoloader --no-interaction --no-progress
 
       - name: Créer .htaccess pour mutualisé
+        shell: bash
         run: |
-          echo "" >> .htaccess
-          echo "RewriteEngine On" > .htaccess
-          echo "" >> .htaccess
-          echo "RewriteCond %{REQUEST_FILENAME} !-f" >> .htaccess
-          echo "RewriteCond %{REQUEST_FILENAME} !-d" >> .htaccess
-          echo "RewriteRule ^(.*)$ public/\$1 [L]" >> .htaccess
+          cat > .htaccess <<'EOF'
+          RewriteEngine On
+          
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule ^(.*)$ public/$1 [L]
+          EOF
 
       - name: Créer .env
+        shell: bash
         run: |
-          echo "APP_ENV=dev" >> .env
-          echo "APP_DEBUG=1" >> .env
-          echo "APP_SECRET=${{ secrets.APP_SECRET }}" >> .env
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-          echo "MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0" >> .env
+          cat > .env <<'EOF'
+          APP_ENV=dev
+          APP_SECRET=${{ secrets.APP_SECRET }}
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
+          MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
+          EOF
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -54,7 +58,6 @@ jobs:
             **/.git*
             **/.git*/**
             **/.github/**
-            **/.env
             **/README.md
             **/*.bat
             **/*.sh
@@ -62,3 +65,4 @@ jobs:
             **/tests/**
             var/cache/dev/**
             sonar-project.properties
+            **/var/**
