@@ -2,7 +2,7 @@ name: déploiement vers hébergeur
 on:
   push:
     branches:
-      - ci/deploy
+      - master
   workflow_dispatch:
 
 jobs:
@@ -62,7 +62,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /public_html/
 
-          dangerous-clean-slate: true # true = Supprime tous les fichiers du serveur avant de déployer les nouveaux fichiers
+          dangerous-clean-slate: false # true = Supprime tous les fichiers du serveur avant de déployer les nouveaux fichiers
 
           exclude: |
             **/.git*
