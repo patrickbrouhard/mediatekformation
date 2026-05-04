@@ -1,0 +1,78 @@
+name: déploiement vers hébergeur
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Déploiement vers hébergeur
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code source
+        uses: actions/checkout@v4
+
+      - name: Installation de PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          tools: composer
+
+      - name: Installation des dépendances Composer
+        run: composer install --optimize-autoloader --no-interaction --no-progress
+
+      - name: Créer .htaccess pour mutualisé
+        shell: bash
+        run: |
+          cat > .htaccess <<'EOF'
+          RewriteEngine On
+          Options -Indexes
+
+          # Cas racine "/"
+          RewriteRule ^$ public/index.php [L]
+
+          # Évite les boucles
+          RewriteCond %{REQUEST_URI} !^/public/
+
+          # Si ce n'est ni un fichier ni un dossier
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+
+          # Redirige vers /public
+          RewriteRule ^(.*)$ public/$1 [L]
+          EOF
+
+      - name: Créer .env
+        shell: bash
+        run: |
+          cat > .env <<'EOF'
+          APP_ENV=dev
+          APP_SECRET=${{ secrets.APP_SECRET }}
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
+          MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
+          EOF
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/
+
+          dangerous-clean-slate: false # true = Supprime tous les fichiers du serveur avant de déployer les nouveaux fichiers
+
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/README.md
+            **/*.bat
+            **/*.sh
+            **/*.sql
+            **/tests/**
+            var/cache/dev/**
+            sonar-project.properties
+            **/var/**
