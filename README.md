@@ -1,7 +1,7 @@
 # Mediatekformation
 ## Présentation
 Ce site, développé avec Symfony 6.4 sur la base du code de [ce dépot](https://github.com/CNED-SLAM/mediatekformation), permet d'accéder aux vidéos d'auto-formation proposées par une chaîne de médiathèques et qui sont aussi accessibles sur YouTube.<br> 
-Vous pouvez consulter le site [ici](testhebergement.go.yj.fr)
+Vous pouvez consulter le site [ici](https://testhebergement.go.yj.fr)
 
 ![img1](https://github.com/user-attachments/assets/9c5c503b-738d-40cf-ba53-36ba4c0209e8)
 ## Les différentes pages
