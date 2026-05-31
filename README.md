@@ -62,7 +62,7 @@ La création ou la modification d'une formation se fait à l'aide d'un formulair
 
 **Accessible uniquement à l'administrateur**
 
-![admin-formation.png](../screenshots/symfony/admin-formation.png)
+<img width="1688" height="865" alt="admin-formation" src="https://github.com/user-attachments/assets/a38598e9-ab64-4e24-aebf-26a83062b353" />
 
 ### Page 7 : gestion des playlists
 
@@ -71,7 +71,7 @@ La création ou la modification d'une playlist se fait à l'aide d'un formulaire
 
 **Accessible uniquement à l'administrateur**
 
-![admin-playlist.png](../screenshots/symfony/admin-playlist.png)
+<img width="1681" height="861" alt="admin-playlist" src="https://github.com/user-attachments/assets/95a4c6c8-2ac3-47e2-9aa4-3c42998766c4" />
 
 ### Page 8 : gestion des catégories
 
@@ -80,19 +80,19 @@ La création d'une catégorie se fait à l'aide d'un formulaire qui permet de sa
 
 **Accessible uniquement à l'administrateur**
 
-![admin-categorie.png](../screenshots/symfony/admin-categorie.png)
+<img width="1684" height="864" alt="admin-categorie" src="https://github.com/user-attachments/assets/872638d4-c6a3-4031-b018-501c1eee0317" />
 
 ### Formulaires
 Voici les différents formulaires utilisés pour la création ou la modification d'une formation, d'une playlist ou d'une catégorie.
 
 - Formulaire de création ou de modification d'une formation
-![form-creationformation.png](../screenshots/symfony/form-creationformation.png)
+<img width="1676" height="848" alt="form-creationformation" src="https://github.com/user-attachments/assets/a2e7ab14-a561-49ed-9627-7cfbf000e9ba" />
 
 - Formulaire de création ou de modification d'une playlist
-![form-creationplaylist.png](../screenshots/symfony/form-creationplaylist.png)
+<img width="1703" height="862" alt="form-creationplaylist" src="https://github.com/user-attachments/assets/0fde3fec-767e-49e8-8870-f0ef9d2ee870" />
 
 - Formulaire de login
-![form-login.png](../screenshots/symfony/form-login.png)
+<img width="1686" height="868" alt="form-login" src="https://github.com/user-attachments/assets/81122a1d-d4f2-4002-b654-060f61986f5c" />
 
 ## La base de données
 La base de données exploitée par le site est au format MySQL.
