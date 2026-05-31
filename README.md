@@ -1,7 +1,8 @@
 # Mediatekformation
 ## Présentation
-Ce site, développé avec Symfony 6.4, permet d'accéder aux vidéos d'auto-formation proposées par une chaîne de médiathèques et qui sont aussi accessibles sur YouTube.<br> 
-Actuellement, seule la partie front office a été développée. Elle contient les fonctionnalités globales suivantes :<br>
+Ce site, développé avec Symfony 6.4 sur la base du code de [ce dépot](https://github.com/CNED-SLAM/mediatekformation), permet d'accéder aux vidéos d'auto-formation proposées par une chaîne de médiathèques et qui sont aussi accessibles sur YouTube.<br> 
+Vous pouvez consulter le site [ici](https://testhebergement.go.yj.fr)
+
 ![img1](https://github.com/user-attachments/assets/9c5c503b-738d-40cf-ba53-36ba4c0209e8)
 ## Les différentes pages
 Voici les 5 pages correspondant aux différents cas d’utilisation.
@@ -53,6 +54,46 @@ La partie centrale est séparée en 2 parties :<br>
 •	La partie gauche contient les informations de la playlist (titre, liste des catégories, description).<br>
 •	La partie droite contient la liste des formations contenues dans la playlist (miniature et titre) avec possibilité de cliquer sur une formation pour aller dans la page de la formation.<br>
 ![img6](https://github.com/user-attachments/assets/f216a9e7-084a-4683-9b4e-cada5574a0e2)
+
+### Page 6 : gestion des formations
+
+Version admin des formations vue plus haut, mais avec en plus la possibilité de créer, modifier ou supprimer une formation. 
+La création ou la modification d'une formation se fait à l'aide d'un formulaire qui permet de saisir les différentes informations (titre, Video ID, description, date de parution, playlist, catégories).
+
+**Accessible uniquement à l'administrateur**
+
+<img width="1688" height="865" alt="admin-formation" src="https://github.com/user-attachments/assets/a38598e9-ab64-4e24-aebf-26a83062b353" />
+
+### Page 7 : gestion des playlists
+
+Version admin des playlists vue plus haut, mais avec en plus la possibilité de créer, modifier ou supprimer une playlist. 
+La création ou la modification d'une playlist se fait à l'aide d'un formulaire qui permet de saisir les différentes informations (nom, description, catégories).
+
+**Accessible uniquement à l'administrateur**
+
+<img width="1681" height="861" alt="admin-playlist" src="https://github.com/user-attachments/assets/95a4c6c8-2ac3-47e2-9aa4-3c42998766c4" />
+
+### Page 8 : gestion des catégories
+
+Version admin des catégories vue plus haut, mais avec en plus la possibilité de créer ou supprimer une catégorie. 
+La création d'une catégorie se fait à l'aide d'un formulaire qui permet de saisir les différentes informations (nom).
+
+**Accessible uniquement à l'administrateur**
+
+<img width="1684" height="864" alt="admin-categorie" src="https://github.com/user-attachments/assets/872638d4-c6a3-4031-b018-501c1eee0317" />
+
+### Formulaires
+Voici les différents formulaires utilisés pour la création ou la modification d'une formation, d'une playlist ou d'une catégorie.
+
+- Formulaire de création ou de modification d'une formation
+<img width="1676" height="848" alt="form-creationformation" src="https://github.com/user-attachments/assets/a2e7ab14-a561-49ed-9627-7cfbf000e9ba" />
+
+- Formulaire de création ou de modification d'une playlist
+<img width="1703" height="862" alt="form-creationplaylist" src="https://github.com/user-attachments/assets/0fde3fec-767e-49e8-8870-f0ef9d2ee870" />
+
+- Formulaire de login
+<img width="1686" height="868" alt="form-login" src="https://github.com/user-attachments/assets/81122a1d-d4f2-4002-b654-060f61986f5c" />
+
 ## La base de données
 La base de données exploitée par le site est au format MySQL.
 ### Schéma conceptuel de données

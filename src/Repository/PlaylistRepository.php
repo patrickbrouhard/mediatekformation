@@ -75,14 +75,13 @@ class PlaylistRepository extends ServiceEntityRepository
     public function findAllOrderByNbFormations($ordre): array
     {
         return $this->createQueryBuilder('p')
-        // Jointure de p vers f afin que tous les p apparaissent, même si pas de f
+        // Jointure de p vers f afin que tous les p apparaissent, même si pas de f (inclure les playlists sans formation)
         ->leftJoin('p.formations', 'f')
-        // Ajoute le COUNT(f.id) uniquement pour le tri
-        // HIDDEN car on en a pas besoin pour afficher le nombre
+        // COUNT utilisé uniquement pour le tri, masqué (HIDDEN) dans les résultats
         ->addSelect('COUNT(f.id) AS HIDDEN nbFormations')
         ->groupBy('p.id')
-        ->orderBy('nbFormations', $ordre)
-        ->addOrderBy('p.name', 'ASC')
+        ->orderBy('nbFormations', $ordre) // Tri principal : nombre de formations
+        ->addOrderBy('p.name', 'ASC') // Tri secondaire : nom de la playlist
         ->getQuery()
         ->getResult();
     }

@@ -167,6 +167,13 @@ class AdminPlaylistsController extends AbstractController
     public function edit(int $id, Request $request): Response
     {
         $playlist = $this->playlistRepository->find($id);
+
+        // Si l'ID n'existe pas, rediriger vers la liste des playlists
+        if (!$playlist) {
+            $this->addFlash('danger', 'Playlist non trouvée.');
+            return $this->redirectToRoute('admin.playlists');
+        }
+
         $formPlaylist = $this->createForm(PlaylistType::class, $playlist);
         
         $formPlaylist->handleRequest($request);
