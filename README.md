@@ -1,7 +1,8 @@
 # Mediatekformation
 ## Présentation
-Ce site, développé avec Symfony 6.4, permet d'accéder aux vidéos d'auto-formation proposées par une chaîne de médiathèques et qui sont aussi accessibles sur YouTube.<br> 
-Actuellement, seule la partie front office a été développée. Elle contient les fonctionnalités globales suivantes :<br>
+Ce site, développé avec Symfony 6.4 sur la base du code de [ce dépot](https://github.com/CNED-SLAM/mediatekformation), permet d'accéder aux vidéos d'auto-formation proposées par une chaîne de médiathèques et qui sont aussi accessibles sur YouTube.<br> 
+Vous pouvez consulter le site [ici](testhebergement.go.yj.fr)
+
 ![img1](https://github.com/user-attachments/assets/9c5c503b-738d-40cf-ba53-36ba4c0209e8)
 ## Les différentes pages
 Voici les 5 pages correspondant aux différents cas d’utilisation.
@@ -53,6 +54,46 @@ La partie centrale est séparée en 2 parties :<br>
 •	La partie gauche contient les informations de la playlist (titre, liste des catégories, description).<br>
 •	La partie droite contient la liste des formations contenues dans la playlist (miniature et titre) avec possibilité de cliquer sur une formation pour aller dans la page de la formation.<br>
 ![img6](https://github.com/user-attachments/assets/f216a9e7-084a-4683-9b4e-cada5574a0e2)
+
+### Page 6 : gestion des formations
+
+Version admin des formations vue plus haut, mais avec en plus la possibilité de créer, modifier ou supprimer une formation. 
+La création ou la modification d'une formation se fait à l'aide d'un formulaire qui permet de saisir les différentes informations (titre, Video ID, description, date de parution, playlist, catégories).
+
+**Accessible uniquement à l'administrateur**
+
+![admin-formation.png](../screenshots/symfony/admin-formation.png)
+
+### Page 7 : gestion des playlists
+
+Version admin des playlists vue plus haut, mais avec en plus la possibilité de créer, modifier ou supprimer une playlist. 
+La création ou la modification d'une playlist se fait à l'aide d'un formulaire qui permet de saisir les différentes informations (nom, description, catégories).
+
+**Accessible uniquement à l'administrateur**
+
+![admin-playlist.png](../screenshots/symfony/admin-playlist.png)
+
+### Page 8 : gestion des catégories
+
+Version admin des catégories vue plus haut, mais avec en plus la possibilité de créer ou supprimer une catégorie. 
+La création d'une catégorie se fait à l'aide d'un formulaire qui permet de saisir les différentes informations (nom).
+
+**Accessible uniquement à l'administrateur**
+
+![admin-categorie.png](../screenshots/symfony/admin-categorie.png)
+
+### Formulaires
+Voici les différents formulaires utilisés pour la création ou la modification d'une formation, d'une playlist ou d'une catégorie.
+
+- Formulaire de création ou de modification d'une formation
+![form-creationformation.png](../screenshots/symfony/form-creationformation.png)
+
+- Formulaire de création ou de modification d'une playlist
+![form-creationplaylist.png](../screenshots/symfony/form-creationplaylist.png)
+
+- Formulaire de login
+![form-login.png](../screenshots/symfony/form-login.png)
+
 ## La base de données
 La base de données exploitée par le site est au format MySQL.
 ### Schéma conceptuel de données

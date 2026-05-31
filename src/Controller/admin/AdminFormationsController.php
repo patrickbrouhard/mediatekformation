@@ -141,6 +141,13 @@ class AdminFormationsController extends AbstractController
     public function edit(int $id, Request $request): Response
     {
         $formation = $this->formationRepository->find($id);
+
+        // Si l'ID n'existe pas, rediriger vers la liste des formations
+        if (!$formation) {
+            $this->addFlash('danger', 'Formation non trouvée.');
+            return $this->redirectToRoute('admin.formations');
+        }
+
         $formFormation = $this->createForm(FormationType::class, $formation);
         
         $formFormation->handleRequest($request);
