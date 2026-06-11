@@ -55,6 +55,8 @@ La partie centrale est séparée en 2 parties :<br>
 •	La partie droite contient la liste des formations contenues dans la playlist (miniature et titre) avec possibilité de cliquer sur une formation pour aller dans la page de la formation.<br>
 ![img6](https://github.com/user-attachments/assets/f216a9e7-084a-4683-9b4e-cada5574a0e2)
 
+<img width="1318" height="956" alt="schema-admin" src="https://github.com/user-attachments/assets/1c66eb9a-fb75-44ca-9e92-9c129d1414d0" />
+
 ### Page 6 : gestion des formations
 
 Version admin des formations vue plus haut, mais avec en plus la possibilité de créer, modifier ou supprimer une formation. 
